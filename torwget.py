@@ -129,14 +129,15 @@ def main():
         return
     
     outfile = url.hostname + os.sep + os.path.basename(opts.site)
-    ### Genuix ADD
     if not os.path.isfile(outfile):
-        # Changed index.html to original filename
-        outfile = url.hostname + os.sep + url.path.split("/")[-1]
+        # if/else for the filename
+        if url.path.split("/") == "":
+            outfile = url.hostname + os.sep + "index.html"
+        else:
+            outfile = url.hostname + os.sep + url.path.split("/")[-1]
 
     cookiefile = url.hostname + os.sep + "cookie.txt"
     headfile = url.hostname + os.sep + "headers.txt"
-    ### END Genuix ADD
     print "Saving %d bytes to %s" % (len(data), outfile)
     
     if not os.path.isdir(url.hostname):
