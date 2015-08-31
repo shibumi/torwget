@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 # Copyright (C) 2010 Michael Ligh (the original code)
-# Modified by @Genuix/MMD 
+#
+# Modified by @Genuix/MalwareMustDie
 # - modified: to save headers and cookie in the same
 #             directory 
+#
+# Modified by @sh1bumi/MalwareMustDie
+# - modified: changed outputfile. Outputfile == file in URL
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,7 +22,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # [NOTES] -----------------------------------------------------------
-# 1) Tested on Linux (Ubuntu), Windows XP/7, and Mac OS X
+# 1) Tested on Linux (Ubuntu/Archlinux), Windows XP/7, and Mac OS X,
 # 2) If the script hangs, make sure you have TOR running on the 
 #        specified TOR_PORT
 #--------------------------------------------------------------------
@@ -127,7 +131,8 @@ def main():
     outfile = url.hostname + os.sep + os.path.basename(opts.site)
     ### Genuix ADD
     if not os.path.isfile(outfile):
-        outfile = url.hostname + os.sep + "index.html"
+        # Changed index.html to original filename
+        outfile = url.hostname + os.sep + url.path.split("/")[-1]
 
     cookiefile = url.hostname + os.sep + "cookie.txt"
     headfile = url.hostname + os.sep + "headers.txt"
